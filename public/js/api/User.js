@@ -8,7 +8,7 @@ class User {
    * Устанавливает текущего пользователя в
    * локальном хранилище.
    * */
-  static url = "/user";
+  static URL = "/user";
   static setCurrent(user) {
     localStorage.user = JSON.stringify(user);
   }
@@ -26,11 +26,7 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    if (localStorage.user) {
-      return JSON.parse(localStorage.user);
-  } else {
-      return undefined;
-  }
+    localStorage.getItem("user");
   }
 
   /**
@@ -41,14 +37,12 @@ class User {
     createRequest({
       url: this.URL + '/current',
       method: 'GET',
-      data,
       responseType: 'json',
       callback: (err, response) => {
           if (response && response.user) {
               this.setCurrent(response.user);
-          } else {
+          } else if (response.success === false){
               this.unsetCurrent();
-              console.log(err);
           }
           callback(err, response);
       }
@@ -66,7 +60,7 @@ class User {
       url: this.URL + '/login',
       method: 'POST',
       responseType: 'json',
-      data,
+      data: data,
       callback: (err, response) => {
         if (response && response.user) {
           this.setCurrent(response.user);
@@ -87,7 +81,7 @@ class User {
       url: this.URL + '/register',
       method: 'POST',
       responseType: 'json',
-      data,
+      data: data,
       callback: (err, response) => {
         if(response && response.user) {
           this.setCurrent(response.user)
@@ -107,7 +101,6 @@ class User {
       url: this.URL + '/logout',
       method: 'POST',
       responseType: 'json',
-      data,
       callback: (err, response) => {
         if(response && response.user) {
           this.unsetCurrent(response.user)

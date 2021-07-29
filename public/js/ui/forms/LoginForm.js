@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 /**
  * Класс LoginForm управляет формой
  * входа в портал
@@ -10,6 +12,12 @@ class LoginForm extends AsyncForm {
    * закрывает окно, в котором находится форма
    * */
   onSubmit(data) {
-
+    User.login(data, (err, response) =>{
+      if (response && response.user) { 
+        this.element.reset();// сбрасывает форму???
+        App.setState( 'user-logged' );
+        App.getModal( 'register' ).close();
+       }
+    })
   }
 }

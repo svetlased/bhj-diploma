@@ -13,7 +13,7 @@ class Modal {
    * */
   constructor(element){
     if (element === "") {
-      throw new Error("Ошибка");
+      throw new Error("Ошибка, элемент не был передан");
     }
     this.element = element;
     this.registerEvents();
@@ -44,12 +44,12 @@ class Modal {
    * со значением «block»
    * */
   open() {
-    this.element.style.dispay = "block";
+    this.element.style.display = "block";
   }
   /**
    * Закрывает окно: удаляет CSS-свойство display
    * */
   close(){
-    this.element.style.dispay = "none";
+    this.element.style.display = "none";
   }
 }

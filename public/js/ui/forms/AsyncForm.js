@@ -14,7 +14,7 @@ class AsyncForm {
    * */
   constructor(element) {
     if (element === "") {
-      throw new Error("Ошибка");
+      throw new Error("Ошибка, элемент не был передан");
     }
     this.element = element;
     this.registerEvents();

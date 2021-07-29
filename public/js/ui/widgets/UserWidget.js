@@ -12,7 +12,11 @@ class UserWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor(element){
-
+    if (element == null) {
+      throw new Error("Ошибка! Не заполнено");
+    } else {
+      this.element = element;
+    }
   }
 
   /**
@@ -23,6 +27,9 @@ class UserWidget {
    * авторизованного пользователя
    * */
   update(){
+    if (User.current()) {
+      document.querySelector("p.user-name").innerText = User.current().name;
+    }
 
   }
 }

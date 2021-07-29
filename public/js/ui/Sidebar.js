@@ -42,17 +42,15 @@ class Sidebar {
 
     itemRegister.addEventListener("click", (event) => {
       event.preventDefault();
-      const modal = App.getModal('register');
-      modal.open();
+      App.getModal('register').open();
     })
     itemLogin.addEventListener("click", (event) => {
       event.preventDefault();
-      const modal = App.getModal('login');
-      modal.open();
+      App.getModal('login').open();
     })
     itemLogout.addEventListener("click", (event) => {
       event.preventDefault();
-      User.logout(User.current(), (err, response) => {
+      User.logout((err, response) => {
         if (response.success === true) {
         App.setState( 'init' ) 
       }
